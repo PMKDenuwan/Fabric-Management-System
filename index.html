@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ZYENTRA - Fabric Management</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+
+        .form-section {
+            padding: 40px;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        label {
+            display: block;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 8px;
+            font-size: 0.95em;
+        }
+
+        input[type="text"],
+        input[type="number"] {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 1em;
+            transition: border-color 0.3s;
+        }
+
+        input[type="text"]:focus,
+        input[type="number"]:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .row-triple {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 20px;
+        }
+
+        .radio-group {
+            display: flex;
+            gap: 30px;
+            margin-top: 10px;
+        }
+
+        .radio-option {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        input[type="radio"] {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+        }
+
+        .radio-option label {
+            margin: 0;
+            cursor: pointer;
+            font-weight: 500;
+        }
+
+        .discount-options {
+            margin-top: 15px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            display: none;
+        }
+
+        .discount-options.active {
+            display: block;
+        }
+
+        .calculation-box {
+            background: #f0f4ff;
+            border-left: 4px solid #667eea;
+            padding: 20px;
+            margin-top: 30px;
+            border-radius: 8px;
+        }
+
+        .calculation-box h3 {
+            color: #667eea;
+            margin-bottom: 15px;
+        }
+
+        .calc-step {
+            padding: 10px 0;
+            border-bottom: 1px solid #d0d0d0;
+        }
+
+        .calc-step:last-child {
+            border-bottom: none;
+            font-weight: 600;
+            font-size: 1.1em;
+            color: #667eea;
+            padding-top: 15px;
+        }
+
+        .btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px 40px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s;
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .info-badge {
+            display: inline-block;
+            background: #e3f2fd;
+            color: #1976d2;
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 0.85em;
+            margin-left: 10px;
+        }
+
+        .expected-items {
+            background: #e8f5e9;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 10px;
+        }
+
+        .expected-items strong {
+            color: #2e7d32;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🧵 ZYENTRA</h1>
+            <p>Fabric Management System</p>
+        </div>
+
+        <div class="form-section">
+            <form id="fabricForm">
+                <div class="row">
+                    <div class="form-group">
+                        <label>Fabric Name</label>
+                        <input type="text" id="fabricName" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Fabric Height (inches)</label>
+                        <input type="number" id="fabricHeight" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Fabric Price Per Yard ($)</label>
+                    <input type="number" id="pricePerYard" step="0.01" required>
+                </div>
+
+                <div class="row-triple">
+                    <div class="form-group">
+                        <label>Apparel Length (inches)</label>
+                        <input type="number" id="apparelLength" value="65">
+                    </div>
+                    <div class="form-group">
+                        <label>Number of Yards</label>
+                        <input type="number" id="displayYards" value="15" step="0.01">
+                    </div>
+                    <div class="form-group expected-items">
+                        <label>Expected Items</label>
+                        <strong id="expectedItems">8</strong>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Purchase Type</label>
+                    <div class="radio-group">
+                        <div class="radio-option">
+                            <input type="radio" id="byYards" name="purchaseType" value="yards" checked>
+                            <label for="byYards">Number of Yards</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="byRolls" name="purchaseType" value="rolls">
+                            <label for="byRolls">Number of Rolls</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="yardsInput" class="form-group">
+                    <label>Enter Number of Yards</label>
+                    <input type="number" id="numYards" step="0.01" value="15">
+                </div>
+
+                <div id="rollsInput" class="form-group hidden">
+                    <div class="row">
+                        <div class="form-group">
+                            <label>Yards Per Roll</label>
+                            <input type="number" id="yardsPerRoll" value="50" step="0.01">
+                        </div>
+                        <div class="form-group">
+                            <label>Number of Rolls</label>
+                            <input type="number" id="numRolls" step="1">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Receive Discount?</label>
+                    <div class="radio-group">
+                        <div class="radio-option">
+                            <input type="radio" id="discountYes" name="discount" value="yes">
+                            <label for="discountYes">Yes</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="discountNo" name="discount" value="no" checked>
+                            <label for="discountNo">No</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="discountOptions" class="discount-options">
+                    <label>Discount Type</label>
+                    <div class="radio-group" style="flex-direction: column;">
+                        <div class="radio-option">
+                            <input type="radio" id="overallDiscount" name="discountType" value="overall">
+                            <label for="overallDiscount">Discount for Overall Fabric ($)</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="perYardDiscount" name="discountType" value="perYard">
+                            <label for="perYardDiscount">Discount Per Yard ($)</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="perRollDiscount" name="discountType" value="perRoll">
+                            <label for="perRollDiscount">Discount Per Roll ($)</label>
+                        </div>
+                    </div>
+                    
+                    <div id="discountAmountInput" class="form-group hidden" style="margin-top: 15px;">
+                        <label id="discountLabel">Discount Amount ($)</label>
+                        <input type="number" id="discountAmount" step="0.01">
+                    </div>
+                </div>
+
+                <button type="submit" class="btn">Calculate Total Amount</button>
+
+                <div id="calculationResult" class="calculation-box hidden">
+                    <h3>📊 Calculation Breakdown</h3>
+                    <div id="calcSteps"></div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        const form = document.getElementById('fabricForm');
+        const yardsInput = document.getElementById('yardsInput');
+        const rollsInput = document.getElementById('rollsInput');
+        const discountOptions = document.getElementById('discountOptions');
+        const discountAmountInput = document.getElementById('discountAmountInput');
+        const calculationResult = document.getElementById('calculationResult');
+        const calcSteps = document.getElementById('calcSteps');
+
+        // Calculate expected items
+        function calculateExpectedItems() {
+            const apparelLength = parseFloat(document.getElementById('apparelLength').value) || 65;
+            const yards = parseFloat(document.getElementById('displayYards').value) || 15;
+            const totalInches = yards * 36;
+            const expectedItems = Math.floor(totalInches / apparelLength);
+            document.getElementById('expectedItems').textContent = expectedItems;
+        }
+
+        document.getElementById('apparelLength').addEventListener('input', calculateExpectedItems);
+        document.getElementById('displayYards').addEventListener('input', calculateExpectedItems);
+
+        // Toggle purchase type
+        document.querySelectorAll('input[name="purchaseType"]').forEach(radio => {
+            radio.addEventListener('change', (e) => {
+                if (e.target.value === 'yards') {
+                    yardsInput.classList.remove('hidden');
+                    rollsInput.classList.add('hidden');
+                } else {
+                    yardsInput.classList.add('hidden');
+                    rollsInput.classList.remove('hidden');
+                }
+            });
+        });
+
+        // Toggle discount options
+        document.querySelectorAll('input[name="discount"]').forEach(radio => {
+            radio.addEventListener('change', (e) => {
+                if (e.target.value === 'yes') {
+                    discountOptions.classList.add('active');
+                } else {
+                    discountOptions.classList.remove('active');
+                    discountAmountInput.classList.add('hidden');
+                }
+            });
+        });
+
+        // Toggle discount amount input
+        document.querySelectorAll('input[name="discountType"]').forEach(radio => {
+            radio.addEventListener('change', (e) => {
+                discountAmountInput.classList.remove('hidden');
+                const label = document.getElementById('discountLabel');
+                if (e.target.value === 'overall') {
+                    label.textContent = 'Overall Discount Amount ($)';
+                } else if (e.target.value === 'perYard') {
+                    label.textContent = 'Discount Per Yard ($)';
+                } else {
+                    label.textContent = 'Discount Per Roll ($)';
+                }
+            });
+        });
+
+        // Form submission
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            calculateTotal();
+        });
+
+        function calculateTotal() {
+            const fabricName = document.getElementById('fabricName').value;
+            const pricePerYard = parseFloat(document.getElementById('pricePerYard').value);
+            const purchaseType = document.querySelector('input[name="purchaseType"]:checked').value;
+            const hasDiscount = document.querySelector('input[name="discount"]:checked').value === 'yes';
+
+            let totalYards = 0;
+            let steps = [];
+
+            // Calculate total yards
+            if (purchaseType === 'yards') {
+                totalYards = parseFloat(document.getElementById('numYards').value);
+                steps.push(`📏 Purchase Type: By Yards`);
+                steps.push(`Number of Yards: ${totalYards}`);
+            } else {
+                const yardsPerRoll = parseFloat(document.getElementById('yardsPerRoll').value);
+                const numRolls = parseFloat(document.getElementById('numRolls').value);
+                totalYards = yardsPerRoll * numRolls;
+                steps.push(`📏 Purchase Type: By Rolls`);
+                steps.push(`Yards per Roll: ${yardsPerRoll} | Number of Rolls: ${numRolls}`);
+                steps.push(`Total Yards: ${yardsPerRoll} × ${numRolls} = ${totalYards} yards`);
+            }
+
+            // Calculate original amount
+            const originalAmount = pricePerYard * totalYards;
+            steps.push(`💰 Original Amount: $${pricePerYard} × ${totalYards} yards = $${originalAmount.toFixed(2)}`);
+
+            let finalAmount = originalAmount;
+            let discountApplied = 0;
+
+            // Apply discount if selected
+            if (hasDiscount) {
+                const discountType = document.querySelector('input[name="discountType"]:checked').value;
+                const discountAmount = parseFloat(document.getElementById('discountAmount').value) || 0;
+
+                steps.push(`🎫 Discount Applied: Yes`);
+
+                if (discountType === 'overall') {
+                    discountApplied = discountAmount;
+                    finalAmount = originalAmount - discountAmount;
+                    steps.push(`Discount Type: Overall Fabric Discount`);
+                    steps.push(`Calculation: $${originalAmount.toFixed(2)} - $${discountAmount.toFixed(2)} = $${finalAmount.toFixed(2)}`);
+                } else if (discountType === 'perYard') {
+                    const discountedPricePerYard = pricePerYard - discountAmount;
+                    discountApplied = discountAmount * totalYards;
+                    finalAmount = discountedPricePerYard * totalYards;
+                    steps.push(`Discount Type: Per Yard Discount`);
+                    steps.push(`Discounted Price per Yard: $${pricePerYard} - $${discountAmount} = $${discountedPricePerYard.toFixed(2)}`);
+                    steps.push(`Calculation: $${discountedPricePerYard.toFixed(2)} × ${totalYards} yards = $${finalAmount.toFixed(2)}`);
+                } else if (discountType === 'perRoll') {
+                    const numRolls = parseFloat(document.getElementById('numRolls').value);
+                    const yardsPerRoll = parseFloat(document.getElementById('yardsPerRoll').value);
+                    const pricePerRoll = pricePerYard * yardsPerRoll;
+                    const discountedPricePerRoll = pricePerRoll - discountAmount;
+                    discountApplied = discountAmount * numRolls;
+                    finalAmount = discountedPricePerRoll * numRolls;
+                    steps.push(`Discount Type: Per Roll Discount`);
+                    steps.push(`Original Price per Roll: $${pricePerYard} × ${yardsPerRoll} yards = $${pricePerRoll.toFixed(2)}`);
+                    steps.push(`Discounted Price per Roll: $${pricePerRoll.toFixed(2)} - $${discountAmount.toFixed(2)} = $${discountedPricePerRoll.toFixed(2)}`);
+                    steps.push(`Calculation: $${discountedPricePerRoll.toFixed(2)} × ${numRolls} rolls = $${finalAmount.toFixed(2)}`);
+                }
+
+                steps.push(`💵 Total Savings: $${discountApplied.toFixed(2)}`);
+            } else {
+                steps.push(`🎫 Discount Applied: No`);
+            }
+
+            steps.push(`✅ TOTAL AMOUNT: $${finalAmount.toFixed(2)}`);
+
+            // Display results
+            calcSteps.innerHTML = steps.map(step => `<div class="calc-step">${step}</div>`).join('');
+            calculationResult.classList.remove('hidden');
+            calculationResult.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+    </script>
+</body>
+</html>
