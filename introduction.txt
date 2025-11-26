@@ -1,0 +1,50 @@
+Hey I need to develop system for the 'ZYENTRA' Apparel Store for managing the internal procedure. I have already find the system requiremnts.NOw I need to develop each main sections/functions step by step. I have to choose the path as first develop first section/function with both frontend and backend integration with database.
+
+**Here I choose the stack as MERN
+
+First Section/Function :
+Fabric Management
+Here need to manage information about the fabric that they bought, expected produced items, actual produced items.
+There is a scenario.
+When ZYENTRA team buying fabrics, they already have width of the their designed item/cloth.
+
+Fabric Name :                          Fabric Height:
+Fabric Price Per Yard:                 
+There are two options,(use radio buttons)
+Num. of Yards: 
+Num. of Rolls:   (Normally 1 roll have 50, 52, 55 yards We need to monitor this ) | How many yards for 1 roll
+   1 yard = 36 inches
+Receive Discount:Yes/No     
+If yes : There are three options (use radio buttons):
+1)Discount for overall fabric :
+2)Discount for per yard :
+3)Discount for per roll :
+If NO: directly calculate the price per yards * num. of yards for the Total Amount
+
+Total Amount:
+This Total amount can be vary based on,
+   If user select Num. of Yards * and discount no = directly calculate the amount -> price per yards * num. of yards
+   If user select Num. of Yards * and discount yes with Discount for overall fabric = calculate the amount -> (price per yards * num. of yards)-Discount for overall fabric 
+   (need to shows every steps)
+   If user select Num. of Yards * and discount yes with Discount for per yard =  calculate the amount -> discounted price per yards * num. of yards
+   If user select Num. of Yards * and discount yes with Discount for the roll =  calculate the amount -> discounted roll * num. of rolls
+Need to clearly show how original amount ( price per yards * num. of yards) vs discounted amount
+
+Here I clearly give again what are the fields that I need under fabric management:
+
+Fabric Name :                               
+Fabric Height :
+Fabric Price Per Yard:  
+
+  Apparel length (inches):65 inches             |num. of Yards:15 yards                 |Expected Items:(15*36)/65      
+
+
+visible two options using radio buttons,
+   Num. of Yards:         or         Num. of Rolls:
+when user clicks one of them dynimaclly generate field for user typing
+Receive Discount : Yes/No
+   Discount for overall fabric :    or      Discount for per yard :         or       Discount for per roll :
+Total Amount :
+
+These are the main things that need to manage.
+   
