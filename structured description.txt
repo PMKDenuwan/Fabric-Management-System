@@ -1,0 +1,166 @@
+📌 Fabric Management – Well Organized Description
+
+The Fabric Management Module handles all operations related to fabrics purchased by ZYENTRA. It records fabric details, calculates expected production, and computes total cost with or without discounts.
+
+1. General Fabric Information
+
+The system should capture the basic details of each purchased fabric:
+
+Fabric Name
+
+Fabric Height
+
+Fabric Price Per Yard
+
+Apparel Length (in inches) – fixed measurement of the item they produce
+
+Number of Yards (auto-calculated from rolls if rolls option is selected)
+
+2. Production Calculation
+
+Using the standard conversion:
+
+1 yard = 36 inches
+
+The system calculates:
+
+Expected Items
+Formula:
+
+Expected Items
+=
+Number of Yards
+×
+36
+Apparel Length
+Expected Items=
+Apparel Length
+Number of Yards×36
+	​
+
+
+This gives the approximate number of items that can be produced from the purchased fabric.
+
+3. Fabric Quantity Selection
+
+Users can choose how they want to input the quantity:
+
+Option A – Number of Yards
+
+User enters Num. of Yards directly.
+
+Option B – Number of Rolls
+
+User enters Num. of Rolls.
+
+System asks: “How many yards in 1 roll?” (Roll sizes vary: 50, 52, 55 yards…)
+
+Total yards = rolls × yards-per-roll
+
+This yard value is used for all price and production calculations.
+
+4. Discount Handling
+
+A toggle/radio button:
+Receive Discount? → Yes / No
+
+If NO
+
+Total Amount = Price per yard × Number of yards
+
+If YES
+
+Three discount types are visible (radio buttons):
+
+1) Discount for Overall Fabric
+
+Total Amount =
+
+(
+Price per yard
+×
+Number of yards
+)
+−
+Overall Discount Amount
+(Price per yard×Number of yards)−Overall Discount Amount
+2) Discount Per Yard
+
+User enters discounted price per yard
+
+Total Amount =
+
+Discounted price per yard
+×
+Number of yards
+Discounted price per yard×Number of yards
+3) Discount Per Roll
+
+Used when fabric is purchased as rolls
+
+Total Amount =
+
+Discount per roll
+×
+Number of rolls
+Discount per roll×Number of rolls
+5. Cost Comparison Display
+
+The system must clearly show:
+
+Original Amount
+(Price per yard × Number of yards)
+
+vs.
+
+Discounted Amount
+(Calculation based on the discount type selected)
+
+This helps ZYENTRA monitor savings and verify supplier invoices.
+
+6. Fields Summary (Final Structure)
+Fabric Details
+
+Fabric Name
+
+Fabric Height
+
+Fabric Price Per Yard
+
+Production Information
+
+Apparel Length (in inches)
+
+Number of Yards
+
+Expected Items (auto-calculated)
+
+Quantity Selection
+
+Radio Buttons:
+
+Num. of Yards
+
+Num. of Rolls
+
+Yards per Roll
+
+Discount Section
+
+Receive Discount → Yes / No
+
+If Yes → One of the following:
+
+Discount for Overall Fabric
+
+Discount per Yard
+
+Discount per Roll
+
+Final Calculation
+
+Original Amount
+
+Discounted Amount
+
+Total Amount (final payable amount)
