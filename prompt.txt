@@ -46,5 +46,21 @@ Receive Discount : Yes/No
    Discount for overall fabric :    or      Discount for per yard :         or       Discount for per roll :
 Total Amount :
 
+This is only the CREATE part from the CRUD.
+Read -> Need to show collected data as table.
+Update -> User can be enter data about actual produce items.
+and also update the particular row
+Delete -> user can delete row
+
 These are the main things that need to manage.
    
+This is what I need to do 
+
+You need to well describe this in proper manner like a business analyst explain to the reqirement to the developer.
+You need to clearly defined the requiremnets and how do it
+You need to tell how to develop this step by step to the developer.
+
+First give the full description.
+Then give instructions how to develop this requirement step by step both frontend and backend  with integrating database
+
+Note : Here I attached sample view of the table
